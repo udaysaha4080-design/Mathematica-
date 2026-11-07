@@ -1,0 +1,10 @@
+﻿const assert=require('node:assert/strict');const D=require('../src/date-utils.js');
+assert.equal(D.dateKey(new Date('2026-01-01T16:30:00Z')),'2026-01-01');
+assert.equal(D.dateKey(new Date('2026-01-01T18:30:00Z')),'2026-01-02');
+assert.equal(D.dateKey(new Date('2026-01-01T18:30:00Z'),'America/New_York'),'2026-01-01');
+assert.equal(D.addDays('2026-03-01',-1),'2026-02-28');
+assert.deepEqual(D.weekDates('2026-11-08'),['2026-11-02','2026-11-03','2026-11-04','2026-11-05','2026-11-06','2026-11-07','2026-11-08']);
+assert.equal(D.streak({'2026-11-08':true,'2026-11-07':true,'2026-11-06':true},'2026-11-08'),3);
+assert.equal(D.streak({'2026-11-07':true,'2026-11-06':true},'2026-11-08'),2);
+assert.equal(D.streak({'2026-11-06':true},'2026-11-08'),0);
+console.log('PASS: Asia/Dhaka date boundaries, configurable timezone, week boundaries, and streak grace behavior.');

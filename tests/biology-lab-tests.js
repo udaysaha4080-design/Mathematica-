@@ -1,0 +1,10 @@
+const assert=require('node:assert/strict');
+require('../src/mathematical-engine.js');
+const B=require('../src/biology-lab.js');
+const r=B.calculate([0,1,2,1,0,2],20,10);
+assert.equal(r.frequency,.5);assert.deepEqual(r.observed,[1/3,1/3,1/3]);assert.deepEqual(r.expected,[.25,.5,.25]);assert.equal(r.trajectory.length,11);assert.equal(r.trajectory[0],.5);
+assert.deepEqual(B.calculate([0,1,2,1,0,2],20,10).trajectory,r.trajectory);
+assert.throws(()=>B.calculate([0,1,3],20,10),/Genotypes/);
+assert.throws(()=>B.calculate([],20,10),/Genotypes/);
+assert.throws(()=>B.calculate([0,1],0,10),/positive integer/);
+console.log('PASS: simulated population genetics uses validated genotype counts, HWE expectations, and a reproducible drift trajectory.');
